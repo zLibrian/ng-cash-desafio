@@ -17,7 +17,7 @@ Transaction.init({
     autoIncrement: true,
   },
   value: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.FLOAT,
     allowNull: false,
   },
   debitedAccountId: {

@@ -13,8 +13,9 @@ Account.init({
     autoIncrement: true,
   },
   balance: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.FLOAT,
     allowNull: false,
+    defaultValue: 100,
   },
 }, {
   sequelize: db,
