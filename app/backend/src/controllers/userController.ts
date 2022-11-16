@@ -15,6 +15,12 @@ const userController = {
     const token = await userService.login({ username, password });
     return res.status(200).json({ token });
   },
+
+  getUserBalance: async (req: Request, res: Response): Promise<Response> => {
+    const { accountId, username } = req.body;
+    const balance = await userService.getUserBalance(username, accountId);
+    return res.status(200).json({ balance });
+  },
 };
 
 export default userController;
