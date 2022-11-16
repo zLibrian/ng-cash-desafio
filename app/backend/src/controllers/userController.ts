@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { UserRegister, UserRegisterSchema } from '../interfaces/IUser';
+import { getUserBalanceSchema, UserRegister, UserRegisterSchema } from '../interfaces/IUser';
 import userService from '../services/userService';
 
 const userController = {
@@ -18,6 +18,7 @@ const userController = {
 
   getUserBalance: async (req: Request, res: Response): Promise<Response> => {
     const { accountId, username } = req.body;
+    await getUserBalanceSchema.parseAsync({ accountId, username });
     const balance = await userService.getUserBalance(username, accountId);
     return res.status(200).json({ balance });
   },

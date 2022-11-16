@@ -52,7 +52,7 @@ const userService = {
 
   getUserBalance: async (username: string, accountId: number): Promise<number> => {
     const user = await userService.userExists(username);
-    if (user?.accountId !== accountId) throw new Error('permissionDenied');
+    if (!user || user.accountId !== accountId) throw new Error('permissionDenied');
     const account = await Account.findOne({ where: { id: accountId } });
     if (!account) throw new Error('userNotFound');
     const { balance } = account;
