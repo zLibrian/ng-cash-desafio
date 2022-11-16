@@ -1,0 +1,16 @@
+{
+  "name": "ng-cash",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "npm run install:apps",
+    "install:apps": "./apps_install.sh",
+    "start:backend": "cd app/backend && npm start" ,
+    "start:frontend": "cd app/frontend && npm run build && npm start" ,
+    "start": "npm run start:backend & npm run start:frontend"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
