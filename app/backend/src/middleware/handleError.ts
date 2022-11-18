@@ -4,6 +4,9 @@ import errorMap from '../utils/customErrorsMessage';
 
 const handleErrors = (err: Error, req: Request, res: Response, _next: NextFunction) => {
   if (err instanceof z.ZodError) {
+    if (err.issues[0].code === 'invalid_union') {
+      return res.status(400).json({ message: 'type deve ser ou "cashIn" ou "cashOut" ou "all"' });
+    }
     return res.status(400).json({ error: err.issues.map((issue) => issue.message) });
   }
 
