@@ -1,9 +1,6 @@
 import { Jwt } from 'jsonwebtoken';
+import { UserCreateResponse } from './IUser';
 
 export default interface IJwtPayload extends Jwt {
-  payload: {
-    id: number,
-    role: string,
-    email: string,
-  }
+  payload: UserCreateResponse
 }
