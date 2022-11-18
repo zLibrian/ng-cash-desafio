@@ -10,7 +10,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       value: {
-        type: Sequelize.FLOAT,
+        type: Sequelize.DECIMAL(10, 2),
         allowNull: false,
       },
       debitedAccountId: {
