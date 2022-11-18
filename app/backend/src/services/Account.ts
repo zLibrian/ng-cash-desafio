@@ -45,6 +45,34 @@ const accountService = {
       const { id: _, ...transactionWithoutId } = newTransaction.toJSON();
       return transactionWithoutId;
     }),
+
+  getAllTransactions: async (accountId: number) => {
+    const allTransactions = await TransactionModel.findAll({
+      where: {
+        [Op.or]: [
+          { creditedAccountId: accountId },
+          { debitedAccountId: accountId },
+        ],
+      },
+    });
+    return allTransactions;
+  },
+
+  getTransactionByType: async (accountId: number, type: ITransactionType) => {
+    if (type === 'all') {
+      return accountService.getAllTransactions(accountId);
+    }
+    const transactionType = {
+      cashIn: 'creditedAccountId',
+      cashOut: 'debitedAccountId',
+    };
+    const transactions = await TransactionModel.findAll({
+      where: {
+        [transactionType[type]]: accountId,
+      },
+    });
+    return transactions;
+  },
 };
 
 export default accountService;
