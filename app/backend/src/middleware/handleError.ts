@@ -7,6 +7,10 @@ const handleErrors = (err: Error, req: Request, res: Response, _next: NextFuncti
     return res.status(400).json({ error: err.issues.map((issue) => issue.message) });
   }
 
+  if (err.name === 'JsonWebTokenError') {
+    return res.status(401).json({ error: err.message });
+  }
+
   const { message, code } = errorMap[err.message];
   if (code) return res.status(code).json({ message });
 
