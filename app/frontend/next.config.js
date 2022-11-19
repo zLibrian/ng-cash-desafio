@@ -7,6 +7,15 @@ const nextConfig = {
   },
   publicRuntimeConfig: {
     apiUrl: 'http://localhost:3001'
+  },
+  redirects: async () => {
+    return [
+      {
+        source: '/',
+        destination: '/login',
+        permanent: true
+      }
+    ]
   }
 }
 

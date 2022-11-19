@@ -4,7 +4,14 @@ module.exports = {
     './src/**/*.tsx',
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: 'IBM Plex Sans, sans-serif',
+      },
+      backgroundImage: {
+        app: "url('/app-bg.jpg')",
+      },
+    },
   },
   plugins: [],
 }
