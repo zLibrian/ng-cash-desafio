@@ -9,7 +9,9 @@ const Footer = () => {
       <Link
         href="https://www.google.com"
         target="_blank"
-        className="flex justify-center items-center gap-4 bg-black-800 px-4 py-3 rounded-md w-full"
+        className={` flex justify-center items-center gap-4 bg-black-800 px-4 py-3 rounded-md w-full
+          hover:brightness-125 transition-all duration-300
+        `}
       >
         <Image src={googleIcon} alt="google icon" width={32} />
         <p className="text-white">Login Google</p>
@@ -17,7 +19,9 @@ const Footer = () => {
       <Link
         href="https://play.google.com/store/apps/details?id=com.neaglebank&pli=1"
         target="_blank"
-        className="flex justify-center items-center gap-4 bg-black-800 px-4 py-3 rounded-md w-full"
+        className={` flex justify-center items-center gap-4 bg-black-800 px-4 py-3 rounded-md w-full
+          hover:brightness-125 transition-all duration-300
+        `}
       >
         <Image src={ngCashIcon} alt="ng-cash icon" width={32} />
         <p className="text-white">Baixar o App</p>
