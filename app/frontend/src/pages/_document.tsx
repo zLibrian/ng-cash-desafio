@@ -14,8 +14,9 @@ export default function Document() {
           href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;700&display=swap"
           rel="stylesheet"
         />
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
       </Head>
-      <body className="bg-black bg-app bg-cover bg-no-repeat text-white">
+      <body className="bg-black text-white">
         <Main />
         <NextScript />
       </body>
