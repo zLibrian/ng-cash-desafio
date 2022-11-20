@@ -1,21 +1,14 @@
-import { yupResolver } from '@hookform/resolvers/yup';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { SubmitHandler } from 'react-hook-form';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import loginSchema, { LoginValues } from '../../schemas/loginSchema';
+import { LoginValues } from '../../schemas/loginSchema';
 import api from '../../services/api';
-import { Button } from '../Button';
-import { Input } from '../Input';
+import Form from '../Form';
 
-const Form = () => {
+const FormLogin = () => {
   const router = useRouter();
-  const { register, handleSubmit, formState } = useForm<LoginValues>({
-    mode: 'onChange',
-    resolver: yupResolver(loginSchema),
-  });
-  const { errors } = formState;
 
   const handleLogin: SubmitHandler<LoginValues> = async (formData) => {
     await api
@@ -34,10 +27,7 @@ const Form = () => {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit(handleLogin)}
-      className="flex flex-col items-center gap-2 w-full"
-    >
+    <div className="flex flex-col items-center gap-2 w-full">
       <div className="text-center mb-2">
         <p className="font-black text-3xl text-white pb-1">
           Faça login na sua conta
@@ -45,25 +35,8 @@ const Form = () => {
         <span className="text-white/70 text-base">é para todas as idades!</span>
       </div>
 
-      <Input
-        label="Nome de usuário:"
-        placeholder="Digite seu usuário"
-        error={errors.username}
-        {...register('username')}
-      />
-      <Input
-        label="Senha:"
-        placeholder="Digite sua senha"
-        {...register('password')}
-        error={errors.password}
-        type="password"
-      />
-      <Button
-        text="Login"
-        type="submit"
-        className="mt-6 bg-purple-700"
-        disabled={!formState.isValid}
-      />
+      <Form handleSubmit={handleLogin} buttonLabel="Login" />
+
       <div className="flex flex-col items-center gap-2 mt-4">
         <p className="text-white/70 text-sm">
           Esqueceu sua senha? <span className="text-white">Clique aqui</span>
@@ -76,8 +49,8 @@ const Form = () => {
         </p>
       </div>
       <ToastContainer autoClose={3000} theme="dark" pauseOnHover={false} />
-    </form>
+    </div>
   );
 };
 
-export default Form;
+export default FormLogin;
