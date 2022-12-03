@@ -1,5 +1,6 @@
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
+import { DashboardProvider } from '../context/DashboardProvider';
 import '../styles/globals.css';
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -8,7 +9,9 @@ export default function App({ Component, pageProps }: AppProps) {
       <Head>
         <title>NG.CASH</title>
       </Head>
-      <Component {...pageProps} />
+      <DashboardProvider>
+        <Component {...pageProps} />
+      </DashboardProvider>
     </>
   );
 }

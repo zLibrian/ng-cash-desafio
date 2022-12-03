@@ -15,7 +15,7 @@ userRouter.post('/register', userController.register);
 userRouter.post('/login', userController.login);
 
 userRouter.get('/user/balance', HandleAuth, userController.getUserBalance);
-userRouter.get('/user/transactions', HandleAuth, userController.getTransactions);
+userRouter.post('/user/transactions', HandleAuth, userController.getTransactions);
 
 userRouter.post('/user/transaction', HandleAuth, userController.makeTransaction);
 

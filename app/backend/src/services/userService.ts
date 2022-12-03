@@ -87,9 +87,22 @@ const userService = {
     await userService.isUserAllowed(username, accountId);
     const transactions = await accountService.getTransactionByType(accountId, type);
     const filteredTransactions = date ? transactions.filter((transaction) =>
-      transaction.createdAt.toLocaleDateString() === new Date(date).toLocaleDateString())
-      : transactions;
-    return filteredTransactions;
+      transaction.createdAt.toISOString().includes(date)) : transactions;
+
+    const formattedTransactions = filteredTransactions.map(async (transaction) => {
+      const { creditedAccountId, debitedAccountId } = transaction;
+      const targetUser = await userService.getUserByAccountId(creditedAccountId);
+      const user = await userService.getUserByAccountId(debitedAccountId);
+      return {
+        data: transaction.createdAt.toLocaleDateString('pt-BR'),
+        contaCreditada: targetUser.username,
+        contaDebitada: user.username,
+        valor: +transaction.value,
+        id: transaction.id,
+      };
+    });
+
+    return Promise.all(formattedTransactions);
   },
 };
 

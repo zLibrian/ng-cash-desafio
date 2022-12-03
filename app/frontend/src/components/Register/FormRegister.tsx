@@ -1,9 +1,10 @@
 import { useRouter } from 'next/router';
+import { setCookie } from 'nookies';
 import { SubmitHandler } from 'react-hook-form';
 import { toast } from 'react-toastify';
+import Form from '../../components/Form';
 import { LoginValues } from '../../schemas/loginSchema';
 import api from '../../services/api';
-import Form from '../Form';
 
 const FormRegister = () => {
   const router = useRouter();
@@ -13,7 +14,14 @@ const FormRegister = () => {
       .post('/register', formData)
       .then((response) => {
         toast.success('Cadastro realizado com sucesso!');
-        localStorage.setItem('token', response.data.token);
+        setCookie(undefined, 'token', response.data.token, {
+          maxAge: 60 * 60 * 24 * 30, // 30 days
+          path: '/',
+        });
+        setCookie(undefined, 'username', formData.username, {
+          maxAge: 60 * 60 * 24 * 30, // 30 days
+          path: '/',
+        });
         const intervalId = setTimeout(() => {
           router.push('/dashboard');
         }, 3000);

@@ -8,7 +8,7 @@ type BenefitsProps = {
   description: string;
 };
 
-export function BenefitsCard(props: BenefitsProps) {
+export default function BenefitsCard(props: BenefitsProps) {
   return (
     <div className="flex items-center gap-3">
       <Image

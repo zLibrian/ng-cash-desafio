@@ -6,6 +6,11 @@ const apiUrl = serverRuntimeConfig.apiUrl || publicRuntimeConfig.apiUrl;
 
 const api = axios.create({
   baseURL: apiUrl,
+  headers: {
+    'Content-Type': 'application/json',
+
+  },
+
 });
 
 export default api;

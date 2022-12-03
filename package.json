@@ -8,7 +8,9 @@
     "install:apps": "./apps_install.sh",
     "start:backend": "cd app/backend && npm start" ,
     "start:frontend": "cd app/frontend && npm run build && npm start" ,
-    "start": "npm run start:backend & npm run start:frontend"
+    "start": "npm run start:backend & npm run start:frontend",
+    "compose:up": "cd ./app && docker-compose up",
+    "compose:down": "cd ./app && docker-compose down"
   },
   "keywords": [],
   "author": "",

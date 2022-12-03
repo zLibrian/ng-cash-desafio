@@ -1,27 +1,38 @@
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+import Router from 'next/router';
+import nookies from 'nookies';
 import { SubmitHandler } from 'react-hook-form';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Form from '../../components/Form';
+import { useDashboard } from '../../context/DashboardProvider';
 import { LoginValues } from '../../schemas/loginSchema';
 import api from '../../services/api';
-import Form from '../Form';
 
 const FormLogin = () => {
-  const router = useRouter();
+  const { setUsername } = useDashboard();
 
   const handleLogin: SubmitHandler<LoginValues> = async (formData) => {
     await api
       .post('/login', formData)
       .then((response) => {
+        setUsername(formData.username);
+        nookies.set(undefined, 'token', response.data.token, {
+          maxAge: 60 * 60 * 24 * 30, // 30 days
+          path: '/',
+        });
+        nookies.set(undefined, 'username', formData.username, {
+          maxAge: 60 * 60 * 24 * 30, // 30 days
+          path: '/',
+        });
         toast.success('Login realizado com sucesso!');
-        localStorage.setItem('token', response.data.token);
         const intervalId = setTimeout(() => {
-          router.push('/dashboard');
+          Router.push('/dashboard');
         }, 3000);
         return () => clearTimeout(intervalId);
       })
-      .catch(() => {
+      .catch((err) => {
+        console.log(err);
         return toast.error('Usuário ou senha inválidos');
       });
   };

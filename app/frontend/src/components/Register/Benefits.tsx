@@ -3,7 +3,8 @@ import contaGratisIcon from '../../assets/images/conta-gratis.png';
 import cofrinhoIcon from '../../assets/images/mesada.png';
 import ngShopIcon from '../../assets/images/ng-shop-icon.png';
 import pixIcon from '../../assets/images/pix.png';
-import { BenefitsCard } from './BenefitsCard';
+import BenefitsCard from './BenefitsCard';
+
 const RegisterBenefits = () => {
   return (
     <div className="flex flex-col items-center gap-4 w-full h-full">
